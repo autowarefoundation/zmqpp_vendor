@@ -6,36 +6,15 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_vendor_package REQUIRED)
 
-macro(build_zmqpp)
-  set(cmake_commands)
-  set(cmake_configure_args
-    -Wno-dev
-    -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install)
+ament_vendor(zmqpp_vendor
+  SATISFIED ${zmqpp_FOUND}
+  VCS_URL https://github.com/zeromq/zmqpp.git
+  VCS_VERSION 4.2.0
+  PATCHES patches/zmqpp_export.patch
+)
 
-  include(ExternalProject)
-  externalproject_add(cpp-zmqpp-ext
-    GIT_REPOSITORY https://github.com/zeromq/zmqpp.git
-    GIT_TAG master
-    TIMEOUT 6000
-    ${cmake_commands}
-    CMAKE_ARGS ${cmake_configure_args}
-  )
-  install(
-    DIRECTORY
-      ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_install/
-    DESTINATION
-      ${CMAKE_INSTALL_PREFIX}
-  )
-endmacro()
+ament_export_dependencies(zmqpp)
 
-build_zmqpp()
-ament_export_include_directories(include)
-ament_export_libraries(zmqpp)
-
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  ament_lint_auto_find_test_dependencies()
-endif()
-
-ament_package()
+ament_package(CONFIG_EXTRAS zmqpp_vendor-extras.cmake)
