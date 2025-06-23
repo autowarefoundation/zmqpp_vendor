@@ -11,7 +11,7 @@ find_package(ament_cmake_vendor_package REQUIRED)
 ament_vendor(zmqpp_vendor
   SATISFIED ${zmqpp_FOUND}
   VCS_URL https://github.com/zeromq/zmqpp.git
-  VCS_VERSION 4.2.0
+  VCS_VERSION da73a138f290274cfd604b3f05a908956390a66e
   PATCHES patches/zmqpp_export.patch
 )
 
