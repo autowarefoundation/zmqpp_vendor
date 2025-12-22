@@ -18,10 +18,9 @@ jobs:
       max-parallel: 8
       matrix:
         rosdistro: [
-          [ubuntu-20.04, foxy],
-          [ubuntu-20.04, galactic],
           [ubuntu-22.04, humble],
           [ubuntu-24.04, jazzy],
+          [ubuntu-24.04, kilted],
           [ubuntu-24.04, rolling]]
     env:
       ROS_DISTRO: ${{ matrix.rosdistro[1] }}
