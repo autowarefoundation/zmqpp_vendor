@@ -24,22 +24,25 @@ jobs:
           [ubuntu-24.04, rolling]]
     env:
       ROS_DISTRO: ${{ matrix.rosdistro[1] }}
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2-beta
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v6
+
       - name: Setup ROS2 ${{ matrix.rosdistro[1] }} environment
         uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: ${{ matrix.rosdistro[1] }}
+
       - name: Search packages in this repository
         id: list_packages
         run: |
           echo ::set-output name=package_list::$(colcon list --names-only | sed -e ':loop; N; $!b loop; s/\n/ /g')
+
       - name: Show target packages
         run: |
           echo "Target packages: ${{ steps.list_packages.outputs.package_list }}"
+
       - name: Run build test
         uses: ros-tooling/action-ros-ci@v0.4
         with:
@@ -56,4 +59,4 @@ jobs:
             }
           # If possible, pin the repository in the workflow to a specific commit to avoid
           # changes in colcon-mixin-repository from breaking your tests.
-          colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/1ddb69bedfd1f04c2f000e95452f7c24a4d6176b/index.yaml
+          colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/7558e35befbff0d88d9b8f701b3ab1b073cbcaba/index.yaml
