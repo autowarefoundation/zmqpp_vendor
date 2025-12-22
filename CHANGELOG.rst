@@ -2,8 +2,8 @@
 Changelog for package zmqpp_vendor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.0 (2025-12-22)
+------------------
 * ci: update bloom release info (`#11 <https://github.com/autowarefoundation/zmqpp_vendor/issues/11>`_)
 * feat: use ament_vendor for setting up zmqpp (`#9 <https://github.com/autowarefoundation/zmqpp_vendor/issues/9>`_)
   * Use ament_vendor and CMake export features
