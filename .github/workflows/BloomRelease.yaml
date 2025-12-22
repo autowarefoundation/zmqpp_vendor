@@ -12,7 +12,7 @@ jobs:
       - name: bloom release
         uses: at-wat/bloom-release-action@v0
         with:
-          ros_distro: foxy galactic humble rolling
+          ros_distro: foxy galactic humble jazzy rolling
           github_token_bloom: ${{ secrets.GITHUB_TOKEN_BLOOM }}
           github_user: hakuturu583
           git_user: Masaya Kataoka
